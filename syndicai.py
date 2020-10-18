@@ -4,13 +4,16 @@ from PIL import Image
 from io import BytesIO
 
 from tensorflow.keras.models import load_model
+from helpers import download_model
 
-model_path = "models/best_model_3class.hdf5"
+model_url = "https://www.dropbox.com/s/sb2z0nclqtgg9tk/model_3class.zip?raw=1"
+model_path = 'best_model_3class.hdf5'
 labels_path = "labels.txt"
 
 
 class syndicai(object):
     def __init__(self):
+        download_model(model_url)
         self.model = load_model(model_path, compile=False)
 
     def predict(self, url, features_names=None):
